@@ -1,0 +1,16 @@
+{
+  "name": "youtude",
+  "version": "1.0.0",
+  "description": "youtude like platform",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "javascript",
+    "backend",
+    "chai"
+  ],
+  "author": "\"Pavan Turuk\"",
+  "license": "ISC"
+}
