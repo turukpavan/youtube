@@ -2,6 +2,7 @@ import mongoose, {Schema} from "mongoose";
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcryptjs' ;
 
+
 const userSchema = new Schema({
     username :{
        type : String,
@@ -26,7 +27,7 @@ const userSchema = new Schema({
     },
     avatar :{
         type : String , //cloudinary url
-        required : true,
+        // required : true,
     },
     coverImage : {
        type : String 
@@ -60,7 +61,7 @@ userSchema.methods.isPasswordCorrect = async function (password) {
 }
 
 userSchema.methods.generateAccessToken = function(){
-    jwt.sign(
+    const token = jwt.sign(
         {
             _id :this._id,
             email:this.email,
@@ -72,9 +73,11 @@ userSchema.methods.generateAccessToken = function(){
            expiresIn: process.env.ACCESS_TOKEN_EXPIRY 
         }
     )
+
+    return token
 };
 userSchema.methods.generateRefreshToken = function(){
-    jwt.sign(
+   const token = jwt.sign(
         {
             _id :this._id,
         },
@@ -83,6 +86,8 @@ userSchema.methods.generateRefreshToken = function(){
            expiresIn: process.env.REFRESH_TOKEN_EXPIRY 
         }
     )
+
+    return token
 };
 
 export const  User = mongoose.model('User',userSchema);
